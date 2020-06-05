@@ -1,26 +1,21 @@
 package com.steadyman.todo.controller;
 
 import com.steadyman.todo.dto.Todo;
-import com.steadyman.todo.repository.TodoRepository;
 import com.steadyman.todo.service.TodoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
 public class TodoController {
 
     private final TodoService todoService;
-    private final TodoRepository todoRepository;
 
-    public TodoController(TodoService todoService,
-                          TodoRepository todoRepository) {
+    public TodoController(TodoService todoService) {
         this.todoService = todoService;
-        this.todoRepository = todoRepository;
     }
 
     @GetMapping("/")
@@ -30,9 +25,12 @@ public class TodoController {
 
     @GetMapping("/todo")
     public List<Todo> list() {
-        return todoRepository.findAll().stream()
-                .map(Todo::from)
-                .collect(Collectors.toList());
+        return todoService.getList();
+    }
+
+    @GetMapping("/todo/{id}")
+    public Todo detail(@PathVariable Long id) {
+        return todoService.get(id);
     }
 
     @PostMapping("/todo")
@@ -45,6 +43,11 @@ public class TodoController {
     public Todo edit(@RequestBody @Valid Todo todo) {
         log.info("id = {}, memberSeq = {}, content = {}", todo.getId(), todo.getMemberSeq(), todo.getContent());
         return todoService.editTodo(todo);
+    }
+
+    @DeleteMapping("/todo/{id}")
+    public void delete(@PathVariable Long id) {
+        todoService.deleteTodo(id);
     }
 
 }

@@ -5,7 +5,9 @@ import com.steadyman.todo.entity.TodoEntity;
 import com.steadyman.todo.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static util.StringUtils.sf;
 
@@ -16,6 +18,20 @@ public class TodoService {
 
     public TodoService(TodoRepository todoRepository) {
         this.todoRepository = todoRepository;
+    }
+
+    public List<Todo> getList() {
+        return todoRepository.findAll().stream()
+                .map(Todo::from)
+                .collect(Collectors.toList());
+    }
+
+    public Todo get(Long id) {
+        TodoEntity entity = todoRepository.findById(id).orElse(null);
+        if (Objects.isNull(entity)) {
+            throw new IllegalArgumentException(sf("Not found todo (id = {})", id));
+        }
+        return Todo.from(entity);
     }
 
     public Todo registerTodo(Todo todo) {
@@ -30,5 +46,9 @@ public class TodoService {
         }
         todoEntity.setTodoForEdit(todo.getContent());
         return Todo.from(todoRepository.save(todoEntity));
+    }
+
+    public void deleteTodo(Long id) {
+        todoRepository.deleteById(id);
     }
 }
