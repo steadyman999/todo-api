@@ -38,4 +38,9 @@ public class TodoEntity {
     public static TodoEntity of(Long memberSeq, String content) {
         return new TodoEntity(memberSeq, content, null);
     }
+
+    public void setTodoForEdit(String content) {
+        this.content = content;
+        this.updatedAt = LocalDateTime.now();
+    }
 }
