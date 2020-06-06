@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class TodoEntity {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "TODO_SEQ")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
