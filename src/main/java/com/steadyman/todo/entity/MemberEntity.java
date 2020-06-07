@@ -1,8 +1,11 @@
 package com.steadyman.todo.entity;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Getter
 @Entity
 @Table(name = "MEMBER")
 public class MemberEntity {
