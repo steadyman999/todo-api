@@ -47,7 +47,7 @@ public class MemberControllerTest {
     @Test
     public void getMemberList() throws Exception {
         //when
-        mockMvc.perform(get("/member"))
+        mockMvc.perform(get("/api/member"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }

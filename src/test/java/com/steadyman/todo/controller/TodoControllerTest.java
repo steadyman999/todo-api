@@ -48,7 +48,7 @@ public class TodoControllerTest {
     @Test
     public void getTodoList() throws Exception {
         //when
-        mockMvc.perform(get("/todo"))
+        mockMvc.perform(get("/api/todo"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(objectMapper.writeValueAsString(todoRepository.findAll())));
@@ -60,7 +60,7 @@ public class TodoControllerTest {
         final String content = objectMapper.writeValueAsString(Todo.of(0L, "영화보기"));
 
         //when
-        mockMvc.perform(post("/todo")
+        mockMvc.perform(post("/api/todo")
                 .content(content)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -73,7 +73,7 @@ public class TodoControllerTest {
         final Long id = 1L;
 
         //when
-        mockMvc.perform(get("/todo/" + id))
+        mockMvc.perform(get("/api/todo/" + id))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(objectMapper.writeValueAsString(todoRepository.findById(id).orElse(null))));
@@ -85,7 +85,7 @@ public class TodoControllerTest {
         final String content = objectMapper.writeValueAsString(Todo.of(1L, 0L, "영화보기"));
 
         //when
-        mockMvc.perform(put("/todo")
+        mockMvc.perform(put("/api/todo")
                 .content(content)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -98,7 +98,7 @@ public class TodoControllerTest {
         final Long id = 1L;
 
         //when
-        mockMvc.perform(delete("/todo/" + id))
+        mockMvc.perform(delete("/api/todo/" + id))
                 .andExpect(status().isOk());
     }
 }

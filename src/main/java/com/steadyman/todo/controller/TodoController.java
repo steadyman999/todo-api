@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
+@RequestMapping("/api")
 @RestController
 public class TodoController {
 
@@ -18,7 +19,7 @@ public class TodoController {
         this.todoService = todoService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String health() {
         return "OK";
     }
