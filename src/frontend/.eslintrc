@@ -1,0 +1,17 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "plugin:vue/essential",
+    "airbnb-base"
+  ],
+  "plugins": ["import"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "parser": "babel-eslint"
+  },
+  "rules": {
+    "no-console": 0
+  }
+}
