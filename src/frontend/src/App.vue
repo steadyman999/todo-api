@@ -1,33 +1,29 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <v-app>
+    <TopBar/>
+    <v-main>
+      <ContentContainer/>
+    </v-main>
+    <BottomNav/>
+  </v-app>
 </template>
 
 <script>
-import axios from 'axios';
-import HelloWorld from './components/HelloWorld.vue';
+import TopBar from './components/TopBar.vue';
+import ContentContainer from './components/ContentContainer.vue';
+import BottomNav from './components/BottomNav.vue';
 
 export default {
   name: 'App',
+
   components: {
-    HelloWorld,
+    TopBar,
+    ContentContainer,
+    BottomNav,
   },
-  async mounted() {
-    const response = await axios.get('/api');
-    console.log(response);
-  },
+
+  data: () => ({
+    //
+  }),
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
