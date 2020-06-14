@@ -22,5 +22,5 @@
       ],
     };
     ```
-- Vuetify 추
+- Vuetify 추가
   - `vue add vutify`
